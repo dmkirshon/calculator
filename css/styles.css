@@ -1,0 +1,92 @@
+/* General Style */
+
+html {
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+*, 
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+body {
+    padding: 0;
+    margin: 5em auto;
+    display: flex;
+    justify-content: center;
+}
+
+div {
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    margin: 0;
+    padding: 0;
+    border: grey 1px solid;
+    height: 100px;
+    font-size: 32px;
+
+}
+/* Calculator */
+
+.wrapper {
+    border: 3px solid black;
+    box-shadow:black .5em .5em 1.5em ;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background-color: grey;
+    width: 432px;
+}
+
+
+/* Display */
+
+.display {
+    background-color: black;
+    color: white;
+    font-size: 42px;
+    height: 50px;
+    margin: .5em 0;
+    text-align: end;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+/* Input */
+
+.inputs {
+    background-color: grey;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.row {
+    display: flex;
+    justify-content: stretch;
+}
+
+.number {
+    flex: 1;
+}
+
+.operator {
+    flex: 1;
+}
+
+.equal {
+    flex: 2;
+}
+
+.row-five {
+    justify-content: flex-end;
+}
+.clear {
+    width: 100px;
+}
