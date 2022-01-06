@@ -6,7 +6,10 @@
 
 // 
 
+const numberButtons = document.querySelectorAll('.number');
+const valueTextDisplay = document.querySelector('.display');
 let result = 0;
+let displayValue = 0;
 
 // arithmetic functions
 // addOperation
@@ -50,6 +53,23 @@ function operate(operator, firstValue, secondValue) {
     
     return result;
     }
+}
+
+//numbers to display
+
+numberButtons.forEach(btn => btn.addEventListener('click', enterNumber));
+
+function enterNumber() {
+    const enteredNumber = Number(this.textContent);
+
+    if(displayValue === 0) {
+        displayValue = enteredNumber;
+    } else {
+        displayValue = displayValue*10 + enteredNumber;
+    }
+    console.log(displayValue);
+    valueTextDisplay.textContent = displayValue;
+
 }
 
 //clear
