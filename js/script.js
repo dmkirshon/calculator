@@ -7,9 +7,14 @@
 // 
 
 const numberButtons = document.querySelectorAll('.number');
+const operatorButtons = document.querySelectorAll('.operator');
+const equalButton = document.querySelector('.equal');
 const valueTextDisplay = document.querySelector('.display');
 let result = 0;
 let displayValue = 0;
+let firstNumber = 0;
+let secondNumber = 0;
+let operator = '';
 
 // arithmetic functions
 // addOperation
@@ -37,22 +42,21 @@ function divisionOperation(firstValue, secondValue) {
 
 function operate(operator, firstValue, secondValue) {
     switch (operator) {
-        case '+':
+        case '\53':
             result = addOperation(firstValue, secondValue);
             break;
-        case '-':
+        case '\u2212':
             result = subtractOperation(firstValue, secondValue);
             break;
-        case '*':
-            result = addOperation(firstValue, secondValue);
+        case '\327':
+            result = multiplyOperation(firstValue, secondValue);
             break;
-        case '/':
-            result = addOperation(firstValue, secondValue);
+        case '\367':
+            result = divisionOperation(firstValue, secondValue);
             break;
-        default:
-    
-    return result;
+        default:    
     }
+    return result;
 }
 
 //numbers to display
@@ -67,10 +71,39 @@ function enterNumber() {
     } else {
         displayValue = displayValue*10 + enteredNumber;
     }
-    console.log(displayValue);
     valueTextDisplay.textContent = displayValue;
 
 }
+
+//operator
+
+operatorButtons.forEach(btn => btn.addEventListener('click', enterOperator));
+
+function enterOperator() {
+    operator = this.textContent;
+    firstNumber = displayValue;
+    displayValue = 0;
+
+    valueTextDisplay.textContent = displayValue;
+}
+
+//equals
+
+equalButton.addEventListener('click', enterEqual);
+
+function enterEqual() {
+    secondNumber = displayValue;
+    displayValue = operate(operator, firstNumber, secondNumber);
+    valueTextDisplay.textContent = displayValue;
+}
+
+
+//identify operation
+//save display value save operation
+//enter second number
+//equal sign press => operate
+// display operate result
+
 
 //clear
 
