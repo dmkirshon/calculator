@@ -17,6 +17,7 @@ let firstNumber = 0;
 let secondNumber = 0;
 let operator = '';
 const maxEntered = 99999999999999;
+const maxDigits = 14;
 
 // arithmetic functions
 // addOperation
@@ -100,7 +101,21 @@ function enterEqual() {
     if (operator) {
         secondNumber = displayValue;
         displayValue = operate(operator, firstNumber, secondNumber);
-        valueTextDisplay.textContent = displayValue;
+
+        if (displayValue > maxEntered) {
+            valueTextDisplay.textContent = displayValue.toExponential(10);
+        } else if (displayValue.toString().includes('.')) {
+            const intValue = displayValue.toFixed(0);
+            const numberOfDigits = intValue.toString().length;
+            const fixDigitsToFit = Math.abs(maxDigits - numberOfDigits);
+            valueTextDisplay.textContent = displayValue.toFixed(fixDigitsToFit);
+        } else {
+            valueTextDisplay.textContent = displayValue;
+        }
+        
+        
+        
+        
     }
     operator = '';
 
