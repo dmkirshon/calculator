@@ -9,8 +9,9 @@
 const numberButtons = document.querySelectorAll('.number');
 const operatorButtons = document.querySelectorAll('.operator');
 const equalButton = document.querySelector('.equal');
+const clearButton = document.querySelector('.clear');
 const valueTextDisplay = document.querySelector('.display');
-let result = 0;
+
 let displayValue = 0;
 let firstNumber = 0;
 let secondNumber = 0;
@@ -41,6 +42,7 @@ function divisionOperation(firstValue, secondValue) {
 //operate
 
 function operate(operator, firstValue, secondValue) {
+    let result = 0;
     switch (operator) {
         case '\u002B':
             result = addOperation(firstValue, secondValue);
@@ -97,13 +99,15 @@ function enterEqual() {
     valueTextDisplay.textContent = displayValue;
 }
 
-
-//identify operation
-//save display value save operation
-//enter second number
-//equal sign press => operate
-// display operate result
-
-
 //clear
+
+clearButton.addEventListener('click', enterClear);
+
+function enterClear() {
+    displayValue = 0;
+    firstNumber = 0;
+    secondNumber = 0;
+    operator = '';
+    valueTextDisplay.textContent = displayValue;
+}
 
