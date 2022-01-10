@@ -68,6 +68,7 @@ button {
 }
 
 .row {
+    order: 0;
     display: flex;
     justify-content: stretch;
 }
@@ -85,8 +86,13 @@ button {
 }
 
 .row-five {
-    justify-content: flex-end;
+    order: -1;
 }
-.clear {
-    width: 100px;
+
+.row-five * {
+    flex: 1;
+}
+
+.decimal {
+    font-size: 46px;
 }
