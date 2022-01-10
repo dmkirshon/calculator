@@ -1,7 +1,7 @@
 /**
  * Project: Calculator
  * Author: David Kirshon
- * Date: 04 Jan 2022
+ * Date: 10 Jan 2022
  */
 
 // 
@@ -10,9 +10,12 @@ const numberButtons = document.querySelectorAll('.number');
 const operatorButtons = document.querySelectorAll('.operator');
 const equalButton = document.querySelector('.equal');
 const clearButton = document.querySelector('.clear');
+const decimalButton = document.querySelector('.decimal');
+const plusmnButton = document.querySelector('.plusmn');
+const deleteButton = document.querySelector('.delete');
 const valueTextDisplay = document.querySelector('.display');
 
-let displayValue = 0;
+let displayValue = '';
 let firstNumber = 0;
 let secondNumber = 0;
 let operator = '';
@@ -67,14 +70,14 @@ function operate(operator, firstValue, secondValue) {
 numberButtons.forEach(btn => btn.addEventListener('click', enterNumber));
 
 function enterNumber() {
-    const enteredNumber = Number(this.textContent);
+    const enteredNumber = this.textContent;
 
     if (displayValue === 0) {
         displayValue = enteredNumber;
-    } else if(displayValue > maxEntered) {
+    } else if(Math.abs(displayValue) > maxEntered) {
         return;
     } else {
-        displayValue = displayValue * 10 + enteredNumber;
+        displayValue = displayValue + enteredNumber;
     }
     valueTextDisplay.textContent = displayValue;
 
@@ -89,8 +92,8 @@ function enterOperator() {
         enterEqual();
     }
     operator = this.textContent;
-    firstNumber = displayValue;
-    displayValue = 0;
+    firstNumber = Number(displayValue);
+    displayValue = '';
 }
 
 //equals
@@ -99,29 +102,26 @@ equalButton.addEventListener('click', enterEqual);
 
 function enterEqual() {
     if (operator) {
-        secondNumber = displayValue;
-        displayValue = operate(operator, firstNumber, secondNumber);
+        secondNumber = Number(displayValue);
+        displayValue = operate(operator, firstNumber, secondNumber).toString();
 
-        if (displayValue > maxEntered) {
-            valueTextDisplay.textContent = displayValue.toExponential(10);
-        } else if (displayValue.toString().includes('.')) {
-            const intValue = displayValue.toFixed(0);
+        if (Math.abs(displayValue) > maxEntered) {
+            valueTextDisplay.textContent = Number(displayValue).toExponential(10);
+        } else if (displayValue.includes('.') && displayValue.length >= maxDigits) {
+            console.log('big');
+            const intValue = Math.abs(Number(displayValue).toFixed(0));
             const numberOfDigits = intValue.toString().length;
             const fixDigitsToFit = Math.abs(maxDigits - numberOfDigits);
-            valueTextDisplay.textContent = displayValue.toFixed(fixDigitsToFit);
+            valueTextDisplay.textContent = Number(displayValue).toFixed(fixDigitsToFit);
         } else {
             valueTextDisplay.textContent = displayValue;
         }
-        
-        
-        
-        
     }
     operator = '';
 
     // if NaN or Err then allow new numbers to be calculated
-    if (typeof displayValue != 'number') {
-        displayValue = 0;
+    if (displayValue.includes('Err')) {
+        displayValue = '';
     }
 }
 
@@ -130,10 +130,20 @@ function enterEqual() {
 clearButton.addEventListener('click', enterClear);
 
 function enterClear() {
-    displayValue = 0;
+    displayValue = '';
     firstNumber = 0;
     secondNumber = 0;
     operator = '';
     valueTextDisplay.textContent = displayValue;
 }
 
+//decimal
+
+decimalButton.addEventListener('click', enterDecimal);
+
+function enterDecimal() {
+    if (!valueTextDisplay.textContent.includes('.')){
+        displayValue = displayValue + '.'
+        valueTextDisplay.textContent = displayValue;
+    }
+}
