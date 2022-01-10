@@ -16,6 +16,7 @@ let displayValue = 0;
 let firstNumber = 0;
 let secondNumber = 0;
 let operator = '';
+const maxEntered = 99999999999999;
 
 // arithmetic functions
 // addOperation
@@ -69,6 +70,8 @@ function enterNumber() {
 
     if (displayValue === 0) {
         displayValue = enteredNumber;
+    } else if(displayValue > maxEntered) {
+        return;
     } else {
         displayValue = displayValue * 10 + enteredNumber;
     }
