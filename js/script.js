@@ -84,11 +84,12 @@ function enterNumber() {
 operatorButtons.forEach(btn => btn.addEventListener('click', enterOperator));
 
 function enterOperator() {
+    if (operator) {
+        enterEqual();
+    }
     operator = this.textContent;
     firstNumber = displayValue;
     displayValue = 0;
-
-    valueTextDisplay.textContent = displayValue;
 }
 
 //equals
