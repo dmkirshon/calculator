@@ -96,9 +96,12 @@ function enterOperator() {
 equalButton.addEventListener('click', enterEqual);
 
 function enterEqual() {
-    secondNumber = displayValue;
-    displayValue = operate(operator, firstNumber, secondNumber);
-    valueTextDisplay.textContent = displayValue;
+    if (operator) {
+        secondNumber = displayValue;
+        displayValue = operate(operator, firstNumber, secondNumber);
+        valueTextDisplay.textContent = displayValue;
+    }
+    operator = '';
 
     // if NaN or Err then allow new numbers to be calculated
     if (typeof displayValue != 'number') {
