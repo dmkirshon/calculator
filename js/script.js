@@ -155,3 +155,13 @@ function enterPlusmn() {
     displayValue = (-Number(displayValue)).toString();
     valueTextDisplay.textContent = displayValue;
 }
+
+//delete
+
+deleteButton.addEventListener('click', enterDelete);
+
+function enterDelete() {
+    displayValue = displayValue.slice(0, -1)
+    if (!Number(displayValue)) displayValue = '0';
+    valueTextDisplay.textContent = displayValue;
+}
