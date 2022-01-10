@@ -9,7 +9,9 @@ Inputs/Outputs:
 (i) Values 0-9
 (i) Arithmetic operators (+, -, *, /), operates number on next entered number
 (i) Equals operator, evaluates to total
-(i) Clear button, resets all values/operations and clears output box
+(i) Clear All button, resets all values/operations and clears output box
+(i) Decimal button, allows to create floats
+(i) Delete button, backspace number
 
 Skills:
 1) Javascript
