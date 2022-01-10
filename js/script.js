@@ -42,16 +42,16 @@ function divisionOperation(firstValue, secondValue) {
 
 function operate(operator, firstValue, secondValue) {
     switch (operator) {
-        case '\53':
+        case '\u002B':
             result = addOperation(firstValue, secondValue);
             break;
         case '\u2212':
             result = subtractOperation(firstValue, secondValue);
             break;
-        case '\327':
+        case '\u00D7':
             result = multiplyOperation(firstValue, secondValue);
             break;
-        case '\367':
+        case '\u00F7':
             result = divisionOperation(firstValue, secondValue);
             break;
         default:    
