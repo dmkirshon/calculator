@@ -33,8 +33,7 @@ function multiplyOperation(firstValue, secondValue) {
 // divisionOperation
 function divisionOperation(firstValue, secondValue) {
     if (secondValue === 0) {
-        console.log('Error: Divide by Zero!');
-        return;
+        return 'Err: Divide by Zero!';
     }
     return firstValue / secondValue;
 }
@@ -56,7 +55,7 @@ function operate(operator, firstValue, secondValue) {
         case '\u00F7':
             result = divisionOperation(firstValue, secondValue);
             break;
-        default:    
+        default:
     }
     return result;
 }
@@ -68,10 +67,10 @@ numberButtons.forEach(btn => btn.addEventListener('click', enterNumber));
 function enterNumber() {
     const enteredNumber = Number(this.textContent);
 
-    if(displayValue === 0) {
+    if (displayValue === 0) {
         displayValue = enteredNumber;
     } else {
-        displayValue = displayValue*10 + enteredNumber;
+        displayValue = displayValue * 10 + enteredNumber;
     }
     valueTextDisplay.textContent = displayValue;
 
@@ -97,6 +96,11 @@ function enterEqual() {
     secondNumber = displayValue;
     displayValue = operate(operator, firstNumber, secondNumber);
     valueTextDisplay.textContent = displayValue;
+
+    // if NaN or Err then allow new numbers to be calculated
+    if (typeof displayValue != 'number') {
+        displayValue = 0;
+    }
 }
 
 //clear
