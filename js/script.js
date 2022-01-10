@@ -15,7 +15,7 @@ const plusmnButton = document.querySelector('.plusmn');
 const deleteButton = document.querySelector('.delete');
 const valueTextDisplay = document.querySelector('.display');
 
-let displayValue = '';
+let displayValue = '0';
 let firstNumber = 0;
 let secondNumber = 0;
 let operator = '';
@@ -72,7 +72,7 @@ numberButtons.forEach(btn => btn.addEventListener('click', enterNumber));
 function enterNumber() {
     const enteredNumber = this.textContent;
 
-    if (displayValue === 0) {
+    if (displayValue == 0 && !displayValue.includes('.')) {
         displayValue = enteredNumber;
     } else if(Math.abs(displayValue) > maxEntered) {
         return;
@@ -108,7 +108,6 @@ function enterEqual() {
         if (Math.abs(displayValue) > maxEntered) {
             valueTextDisplay.textContent = Number(displayValue).toExponential(10);
         } else if (displayValue.includes('.') && displayValue.length >= maxDigits) {
-            console.log('big');
             const intValue = Math.abs(Number(displayValue).toFixed(0));
             const numberOfDigits = intValue.toString().length;
             const fixDigitsToFit = Math.abs(maxDigits - numberOfDigits);
@@ -121,7 +120,7 @@ function enterEqual() {
 
     // if NaN or Err then allow new numbers to be calculated
     if (displayValue.includes('Err')) {
-        displayValue = '';
+        displayValue = '0';
     }
 }
 
@@ -130,7 +129,7 @@ function enterEqual() {
 clearButton.addEventListener('click', enterClear);
 
 function enterClear() {
-    displayValue = '';
+    displayValue = '0';
     firstNumber = 0;
     secondNumber = 0;
     operator = '';
@@ -146,4 +145,13 @@ function enterDecimal() {
         displayValue = displayValue + '.'
         valueTextDisplay.textContent = displayValue;
     }
+}
+
+//plusminus
+
+plusmnButton.addEventListener('click', enterPlusmn);
+
+function enterPlusmn() {
+    displayValue = (-Number(displayValue)).toString();
+    valueTextDisplay.textContent = displayValue;
 }
