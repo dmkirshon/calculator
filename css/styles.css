@@ -39,7 +39,7 @@ button {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    background-color: grey;
+    background-color: lightgrey;
     width: 432px;
 }
 
@@ -73,6 +73,15 @@ button {
     justify-content: stretch;
 }
 
+.row-five {
+    order: -1;
+}
+
+.row-five * {
+    flex: 1;
+    background-color: lightgrey;
+}
+
 .number {
     flex: 1;
     background-color: rgb(154, 240, 240);
@@ -80,25 +89,29 @@ button {
 
 .operator {
     flex: 1;
-    background-color: turquoise;
+    background-color: rgb(64, 173, 224, 80%);
 }
 .operatorSelected {
     background-color: teal;
 }
 
-.equal {
-    flex: 2;
-}
-
-.row-five {
-    order: -1;
-}
-
-.row-five * {
+.row-four * {
     flex: 1;
-    background-color: white;
+}
+
+.equal {
+    background-color: turquoise;
 }
 
 .decimal {
     font-size: 46px;
+    background-color: rgb(154, 240, 240);
 }
+
+
+
+.zero {
+    flex: 2;
+}
+
+
