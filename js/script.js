@@ -19,8 +19,8 @@ let displayValue = '0';
 let firstNumber = null;
 let secondNumber = null;
 let operator = '';
-const maxEntered = 99999999999999;
-const maxDigits = 14;
+const maxEntered = 99999999999;
+const maxDigits = 11;
 
 // arithmetic functions
 // addOperation
@@ -77,7 +77,7 @@ function enterNumber() {
         if(operator){
             operator.classList.toggle('operatorSelected');
         }
-    } else if(Math.abs(displayValue) > maxEntered) {
+    } else if(displayValue.length > maxDigits) {
         return;
     } else {
         displayValue = displayValue + enteredNumber;
@@ -111,7 +111,7 @@ function enterEqual() {
         
 
         if (Math.abs(displayValue) > maxEntered) {
-            valueTextDisplay.textContent = Number(displayValue).toExponential(10);
+            valueTextDisplay.textContent = Number(displayValue).toExponential(maxDigits - 4);
         } else if (displayValue.includes('.') && displayValue.length >= maxDigits) {
             const intValue = Math.abs(Number(displayValue).toFixed(0));
             const numberOfDigits = intValue.toString().length;
