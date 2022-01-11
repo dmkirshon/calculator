@@ -135,14 +135,17 @@ function enterEqual() {
 
 function concatLargeValues(value){
     if (value.length > maxDigits) {
-        if (value.includes('.') && Math.abs(value) < maxEntered) {
+        if (value.includes('.') && Math.abs(Number(value)) < maxEntered) {
             const intValue = Math.abs(Number(value).toFixed(0));
             const numberOfDigits = intValue.toString().length;
             const fixDigitsToFit = Math.abs(maxDigits - numberOfDigits);
+            console.log(value);
             return Number(value).toFixed(fixDigitsToFit);
         }
         return Number(value).toExponential(maxDigits - 5);
     }
+    
+    return value;
 }
 
 //clear
