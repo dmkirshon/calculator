@@ -52,6 +52,7 @@ button {
     font-size: 42px;
     height: 50px;
     margin: .5em 0;
+    padding-right:.1em;
     text-align: end;
     display: flex;
     align-items: flex-end;
