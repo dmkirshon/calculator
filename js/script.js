@@ -16,8 +16,8 @@ const deleteButton = document.querySelector('.delete');
 const valueTextDisplay = document.querySelector('.display');
 
 let displayValue = '0';
-let firstNumber = 0;
-let secondNumber = 0;
+let firstNumber = null;
+let secondNumber = null;
 let operator = '';
 const maxEntered = 99999999999999;
 const maxDigits = 14;
@@ -105,10 +105,11 @@ function enterOperator() {
 equalButton.addEventListener('click', enterEqual);
 
 function enterEqual() {
-    if (operator) {
+    if (operator && firstNumber !== null && displayValue !== '') {
         secondNumber = Number(displayValue);
         displayValue = operate(operator.textContent, firstNumber, secondNumber).toString();
         
+
         if (Math.abs(displayValue) > maxEntered) {
             valueTextDisplay.textContent = Number(displayValue).toExponential(10);
         } else if (displayValue.includes('.') && displayValue.length >= maxDigits) {
@@ -119,7 +120,8 @@ function enterEqual() {
         } else {
             valueTextDisplay.textContent = displayValue;
         }
-
+        firstNumber = null;
+        secondNumber = null;
         operator = '';
     }
 
@@ -135,8 +137,9 @@ clearButton.addEventListener('click', enterClear);
 
 function enterClear() {
     displayValue = '0';
-    firstNumber = 0;
-    secondNumber = 0;
+    firstNumber = null;
+    secondNumber = null;
+    operatorButtons.forEach(btn => btn.setAttribute('class', 'operator'));
     operator = '';
     valueTextDisplay.textContent = displayValue;
 }
