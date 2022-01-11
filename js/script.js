@@ -75,7 +75,7 @@ function enterNumber() {
     if (displayValue == 0 && !displayValue.includes('.')) {
         displayValue = enteredNumber;
         if(operator){
-            operator.classList.toggle('operatorSelected');
+            operator.classList.remove('operatorSelected');
         }
     } else if(displayValue.length > maxDigits) {
         return;
@@ -92,12 +92,22 @@ operatorButtons.forEach(btn => btn.addEventListener('click', enterOperator));
 
 function enterOperator() {
     if (operator) {
+        // switch operators otherwise evaluate pair values
+        if (displayValue === '') {
+            operator.classList.toggle('operatorSelected');
+            operator = this;
+            operator.classList.toggle('operatorSelected');
+        }
         enterEqual();
     }
+
+    // a number must be entered once an operation is selected
+    if (displayValue !== ''){
     operator = this;
     operator.classList.toggle('operatorSelected');
     firstNumber = Number(displayValue);
     displayValue = '';
+    }   
 }
 
 //equals
@@ -169,6 +179,8 @@ function enterPlusmn() {
 deleteButton.addEventListener('click', enterDelete);
 
 function enterDelete() {
+    if(displayValue === '') return;
+
     displayValue = displayValue.slice(0, -1)
     if (!Number(displayValue)) displayValue = '0';
     valueTextDisplay.textContent = displayValue;
