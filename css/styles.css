@@ -11,10 +11,12 @@ html {
     box-sizing: inherit;
 }
 body {
+    width: 100vw;
+    height: 100vh;
     padding: 0;
-    margin: 5em auto;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 div {
