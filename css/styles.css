@@ -75,10 +75,15 @@ button {
 
 .number {
     flex: 1;
+    background-color: rgb(154, 240, 240);
 }
 
 .operator {
     flex: 1;
+    background-color: turquoise;
+}
+.operatorSelected {
+    background-color: teal;
 }
 
 .equal {
@@ -91,6 +96,7 @@ button {
 
 .row-five * {
     flex: 1;
+    background-color: white;
 }
 
 .decimal {

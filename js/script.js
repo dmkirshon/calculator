@@ -74,6 +74,9 @@ function enterNumber() {
 
     if (displayValue == 0 && !displayValue.includes('.')) {
         displayValue = enteredNumber;
+        if(operator){
+            operator.classList.toggle('operatorSelected');
+        }
     } else if(Math.abs(displayValue) > maxEntered) {
         return;
     } else {
@@ -91,7 +94,8 @@ function enterOperator() {
     if (operator) {
         enterEqual();
     }
-    operator = this.textContent;
+    operator = this;
+    operator.classList.toggle('operatorSelected');
     firstNumber = Number(displayValue);
     displayValue = '';
 }
@@ -103,8 +107,8 @@ equalButton.addEventListener('click', enterEqual);
 function enterEqual() {
     if (operator) {
         secondNumber = Number(displayValue);
-        displayValue = operate(operator, firstNumber, secondNumber).toString();
-
+        displayValue = operate(operator.textContent, firstNumber, secondNumber).toString();
+        
         if (Math.abs(displayValue) > maxEntered) {
             valueTextDisplay.textContent = Number(displayValue).toExponential(10);
         } else if (displayValue.includes('.') && displayValue.length >= maxDigits) {
@@ -115,8 +119,9 @@ function enterEqual() {
         } else {
             valueTextDisplay.textContent = displayValue;
         }
+
+        operator = '';
     }
-    operator = '';
 
     // if NaN or Err then allow new numbers to be calculated
     if (displayValue.includes('Err')) {
