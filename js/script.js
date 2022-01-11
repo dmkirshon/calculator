@@ -118,18 +118,10 @@ function enterEqual() {
     if (operator && firstNumber !== null && displayValue !== '') {
         secondNumber = Number(displayValue);
         displayValue = operate(operator.textContent, firstNumber, secondNumber).toString();
-        
+        displayValue = concatLargeValues(displayValue);
 
-        if (Math.abs(displayValue) > maxEntered) {
-            valueTextDisplay.textContent = Number(displayValue).toExponential(maxDigits - 4);
-        } else if (displayValue.includes('.') && displayValue.length >= maxDigits) {
-            const intValue = Math.abs(Number(displayValue).toFixed(0));
-            const numberOfDigits = intValue.toString().length;
-            const fixDigitsToFit = Math.abs(maxDigits - numberOfDigits);
-            valueTextDisplay.textContent = Number(displayValue).toFixed(fixDigitsToFit);
-        } else {
-            valueTextDisplay.textContent = displayValue;
-        }
+        valueTextDisplay.textContent = displayValue;
+        
         firstNumber = null;
         secondNumber = null;
         operator = '';
@@ -138,6 +130,18 @@ function enterEqual() {
     // if NaN or Err then allow new numbers to be calculated
     if (displayValue.includes('Err')) {
         displayValue = '0';
+    }
+}
+
+function concatLargeValues(value){
+    if (value.length > maxDigits) {
+        if (value.includes('.') && Math.abs(value) < maxEntered) {
+            const intValue = Math.abs(Number(value).toFixed(0));
+            const numberOfDigits = intValue.toString().length;
+            const fixDigitsToFit = Math.abs(maxDigits - numberOfDigits);
+            return Number(value).toFixed(fixDigitsToFit);
+        }
+        return Number(value).toExponential(maxDigits - 5);
     }
 }
 
@@ -171,6 +175,7 @@ plusmnButton.addEventListener('click', enterPlusmn);
 
 function enterPlusmn() {
     displayValue = (-Number(displayValue)).toString();
+    displayValue = concatLargeValues(displayValue);
     valueTextDisplay.textContent = displayValue;
 }
 
