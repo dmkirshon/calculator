@@ -63,6 +63,10 @@ button {
 
 /* Input */
 
+button:active {
+    opacity: 80%;
+}
+
 .inputs {
     background-color: grey;
     display: flex;
